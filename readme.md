@@ -1,3 +1,6 @@
+*This is a **legacy branch** using Zephyr 3.0 and is no longer
+maintained. See the [main branch](https://github.com/urob/zmk-config) for the latest updates.*
+
 # urob's zmk-config
 
 This is my personal [ZMK firmware](https://github.com/zmkfirmware/zmk/) configuration.
