@@ -21,67 +21,73 @@
       ╰───────────╮ 30  31 │ 32  33 ╭───────────╯         ╰───────────╮ LH1 LH0 │ RH0 RH1 ╭───────────╯
                   ╰────────┴────────╯                                 ╰─────────┴─────────╯             */
 
+#define KEYS_L 0 1 2 3 8 9 10 11 12 13 20 21 22 23 24 30 31
+#define KEYS_R 4 5 6 7 14 15 16 17 18 19 25 26 27 28 29 32 33
+
 /* Global settings */
 
 #define QUICK_TAP_MS 175
+#define TAPPING_TERM_LAYERS 175
+#define PRIOR_IDLE_MS 100
+#define TAPPING_TERM_MS 250
 
-&sk {  // sticky-key config
-    release-after-ms = <900>;  // release after 0.6s
-    quick-release;             // no double capitalization when rolling keys
-};
-
-&sl {  // sticky-layer config
-    ignore-modifiers;          // allow chording sticky mods & layers
-};
+#undef COMBO_HOOK
+#define COMBO_HOOK require-prior-idle-ms = <PRIOR_IDLE_MS>;
 
 &lt {  // layer-tap config
-    flavor = "balanced";
-    tapping-term-ms = <200>;
-    quick-tap-ms = <QUICK_TAP_MS>;
+	flavor = "balanced";
+	tapping-term-ms = <TAPPING_TERM_LAYERS>;
+	quick-tap-ms = <QUICK_TAP_MS>;
 };
 
+&mt {
+	tapping-term-ms = <TAPPING_TERM_LAYERS>;
+};
+
+/* left-hand HRMs */
+ZMK_BEHAVIOR(hml, hold_tap,
+    flavor = "balanced";
+    tapping-term-ms = <TAPPING_TERM_MS>;
+    quick-tap-ms = <QUICK_TAP_MS>;                // repeat on tap-into-hold
+    require-prior-idle-ms = <PRIOR_IDLE_MS>;
+    bindings = <&kp>, <&kp>;
+    hold-trigger-key-positions = <KEYS_R>;
+    hold-trigger-on-release;             // delay positional check until key-release
+)
+
+/* right-hand HRMs */
+ZMK_BEHAVIOR(hmr, hold_tap,
+    flavor = "balanced";
+    tapping-term-ms = <TAPPING_TERM_MS>;
+    quick-tap-ms = <QUICK_TAP_MS>;                // repeat on tap-into-hold
+    require-prior-idle-ms = <PRIOR_IDLE_MS>;
+    bindings = <&kp>, <&kp>;
+    hold-trigger-key-positions = <KEYS_L>;
+    hold-trigger-on-release;             // delay positional check until key-release
+)
+
 /* Combos and chords, the basis of basically this entire layout. */
+
 #define COMBO_JOINTLY_MS 25
-ZMK_COMBO(c_bksp, &kp BSPC, 6 7, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_del, &kp DEL, 4 6 7, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_lsuper, &kp LGUI, LM2 LM1, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_rsuper, &kp RGUI, RM1 RM2, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_launcher, &kp LG(LS(SPACE)), LM2 LM1 RM1 RM2, ALL, COMBO_JOINTLY_MS)
+#define COMBO_LAZILY_MS 50
+
+//ZMK_COMBO(name, bindings, keypos, layers, timeout)
+
+ZMK_COMBO(c_terminal, &kp LC(ENTER), LM4 LM5, ALL, COMBO_JOINTLY_MS)
+ZMK_COMBO(c_launcher, &kp LG(SPACE), RM0 RM1, ALL, COMBO_JOINTLY_MS)
+
+ZMK_COMBO(c_bksp, &kp BSPC, RT2 RT3, ALL, COMBO_JOINTLY_MS)
 ZMK_COMBO(c_esc, &kp ESC, LT3 LT2, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_grv, &kp GRAVE, LT3 LT2 LT0, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_tab, &kp TAB, LM5 LM4, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_ins, &kp INS, LM5 LM4 LB4, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_mins, &kp MINUS, RM3 RM4, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_ent, &kp ENTER, RM4 19, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_slsh, &kp SLASH, RB3 RB4, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_pipe, &kp BACKSLASH, RM4 19 RB4, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_plus, &kp PLUS, LB0 LB2 LB3, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_eql, &kp EQUAL, RB0 RB2 RB3, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_lprn, &kp LPAR, LT0 LT1, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_rprn, &kp RPAR, RT0 RT1, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_lbrk, &kp LBKT, LB0 LB1, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_rbrk, &kp RBKT, RB0 RB1, ALL, COMBO_JOINTLY_MS)
-// c_lbrc and c_rbrc are implicit (and more forgiving of thumb timing) given LBKT/RBKT
-// ([ ]) turning into { } with Shift
+ZMK_COMBO(c_ent, &kp ENTER, RM3 RM4, ALL, COMBO_JOINTLY_MS)
+ZMK_COMBO(c_tab, &kp TAB, RM2 RM3 RM4, ALL, COMBO_JOINTLY_MS)
+
+ZMK_COMBO(c_slash, &kp SLASH, RM1 RM2 RT3, ALL, COMBO_JOINTLY_MS)
+ZMK_COMBO(c_pipe, &kp PIPE, LM1 LM2 LT3, ALL, COMBO_JOINTLY_MS)
+
 ZMK_COMBO(c_arrup, &kp UP, LT1 LT2, ALL, COMBO_JOINTLY_MS)
+ZMK_COMBO(c_arrright, &kp RIGHT, LM1 LM2, ALL, COMBO_JOINTLY_MS)
+ZMK_COMBO(c_arrdown, &kp DOWN, LB2 LB3, ALL, COMBO_JOINTLY_MS)
 ZMK_COMBO(c_arrleft, &kp LEFT, LM2 LM3, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_arrright, &kp RIGHT, LM0 LM1, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_arrdown, &kp DOWN, LB1 LB2, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_pgup, &kp PG_UP, RT1 RT2, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_home, &kp HOME, RM0 RM1, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_end, &kp END, RM2 RM3, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_pgdn, &kp PG_DN, RB1 RB2, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_supup, &kp LG(UP), LT3 LT2 LT1, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_supleft, &kp LG(LEFT), LM3 LM2 LM1, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_supright, &kp LG(RIGHT), LM2 LM1 LM0, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_supdn, &kp LG(DOWN), LB3 LB2 LB1, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_mfa, &kp LG(O), LT2 LT1 LT0, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_pwd, &kp LG(LC(O)), RT0 RT1 RT2, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_brightup, &kp C_BRI_UP, RT1 RT2 RT3, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_brightdn, &kp C_BRI_DN, RB1 RB2 RB3, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_voldn, &kp K_VOL_DN, LB2 LB1 LB0, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_volup, &kp K_VOL_UP, RB0 RB1 RB2, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_volmute, &kp K_MUTE, LB2 LB1 LB0 RB0 RB1 RB2, ALL, COMBO_JOINTLY_MS)
 
 ZMK_COMBO(c_bootloader, &bootloader, 8 9 20 31 32 18 19 29, ALL, COMBO_JOINTLY_MS)
 
@@ -100,17 +106,17 @@ ZMK_LAYER(base,
 // ╰─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╯
                    &kp Z         &kp X         &kp C         &kp V         &kp B           &kp N         &kp M         &kp COMMA     &kp DOT       &kp SQT
 //               ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                                             &kp LCTL      &kp LSHFT       NUMS_SPACE    &kp RALT
+                                                             &kp LCTL      &kp LSHFT       NUMS_SPACE    &kp LGUI
 //                                                         ╰─────────────┴─────────────╯ ╰─────────────┴─────────────╯
 )
 
 ZMK_LAYER(nums,
 //                             ╭─────────────┬─────────────┬─────────────┬─────────────╮ ╭─────────────┬─────────────┬─────────────┬─────────────╮
-                                 &kp F7        &kp F8        &kp F9        &kp F12         XXX           &kp 7         &kp 8         &kp 9
+                                 &kp F7        &kp F8        &kp F9        &kp F12         XXX           &kp N7        &kp N8        &kp N9
 // ╭─────────────┬─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────╮
-     XXX           XXX           &kp F4        &kp F5        &kp F6        &kp F11         XXX           &kp 4         &kp 5         &kp 6         &kp DOT       &kp PLUS
+     XXX           XXX           &kp F4        &kp F5        &kp F6        &kp F11         XXX           &kp N4        &kp N5        &kp N6        &kp DOT       &kp PLUS
 // ╰─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╯
-                   XXX           &kp F1        &kp F2        &kp F3        &kp F10         XXX           &kp 1         &kp 2         &kp 3         &kp 0
+                   XXX           &kp F1        &kp F2        &kp F3        &kp F10         XXX           &kp N1        &kp N2        &kp N3        &kp N0
 //               ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
                                                              ___           &kp LSHFT       &kp SPACE     ___
 //                                                         ╰─────────────┴─────────────╯ ╰─────────────┴─────────────╯
