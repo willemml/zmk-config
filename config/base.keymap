@@ -4,9 +4,9 @@
 #include "../zmk-nodefree-config/helper.h"
 
 #define L_BASE 0
-#define L_NUMS 1
-#define L_SYMS 2
-#define L_RECR 3
+#define L_RECR 1
+#define L_NUMS 2
+#define L_SYMS 3
 
 #include "extra_keys.h"
 
@@ -36,7 +36,7 @@
 #define COMBO_HOOK require-prior-idle-ms = <PRIOR_IDLE_MS>;
 
 &lt {  // layer-tap config
-	flavor = "balanced";
+	flavor = "tap-preferred";
 	tapping-term-ms = <TAPPING_TERM_LAYERS>;
 	quick-tap-ms = <QUICK_TAP_MS>;
 };
@@ -89,10 +89,11 @@ ZMK_COMBO(c_slash, &kp SLASH, RM1 RT2 RT3, ALL, COMBO_JOINTLY_MS)
 ZMK_COMBO(c_pipe, &kp PIPE, LM1 LT2 LT3, ALL, COMBO_JOINTLY_MS)
 ZMK_COMBO(c_under, &kp UNDERSCORE, RB1 RB2 RB3, ALL, COMBO_JOINTLY_MS)
 ZMK_COMBO(c_minus, &kp MINUS, LB1 LB2 LB3, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_lparen, &kp LPAR, LT0 LM0, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_rparen, &kp RPAR, RT0 RM0, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_lbrk, &kp LBKT, LM0 LB0, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_rbrk, &kp RBKT, RM0 RB0, ALL, COMBO_JOINTLY_MS)
+
+//ZMK_COMBO(c_lparen, &kp LPAR, LT0 LM0, ALL, COMBO_JOINTLY_MS)
+//ZMK_COMBO(c_rparen, &kp RPAR, RT0 RM0, ALL, COMBO_JOINTLY_MS)
+//ZMK_COMBO(c_lbrk, &kp LBKT, LM0 LB0, ALL, COMBO_JOINTLY_MS)
+//ZMK_COMBO(c_rbrk, &kp RBKT, RM0 RB0, ALL, COMBO_JOINTLY_MS)
 
 ZMK_COMBO(c_arrup, &kp UP, LT1 LT2, ALL, COMBO_JOINTLY_MS)
 ZMK_COMBO(c_arrright, &kp RIGHT, LM1 LM2, ALL, COMBO_JOINTLY_MS)
@@ -112,17 +113,29 @@ ZMK_LAYER(base,
 //                             ╭─────────────┬─────────────┬─────────────┬─────────────╮ ╭─────────────┬─────────────┬─────────────┬─────────────╮
                                  &kp W         &kp F         &kp P         &kp G           &kp J         &kp L         &kp U         &kp Y
 // ╭─────────────┬─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────╮
-     &kp Q         &kp A         &kp R         &kp S         &hml LCTL T   &hml LGUI D     &hmr LGUI H   &hmr LCTL N   &kp E         &kp I         &kp O         &kp SEMICOLON
+     &kp Q         &kp A         &kp R         &hmr LALT S   &hml LCTL T   &hml LGUI D     &hmr LGUI H   &hmr LCTL N   &kp E         &kp I         &kp O         &kp SEMICOLON
 // ╰─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╯
                    &kp Z         &kp X         &kp C         &kp V         &kp B           &kp K         &kp M         &kp COMMA     &kp DOT       &kp SQT
 //               ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                                             &kp LCTL      NUMS_SPACE      &key_repeat   &mo L_SYMS 
+                                                             &kp LA(BSPC)  NUMS_SPACE      &key_repeat   &mo L_SYMS 
+//                                                         ╰─────────────┴─────────────╯ ╰─────────────┴─────────────╯
+)
+
+ZMK_LAYER(recurva,
+//                             ╭─────────────┬─────────────┬─────────────┬─────────────╮ ╭─────────────┬─────────────┬─────────────┬─────────────╮
+                                 &kp R         &kp D         &kp P         &kp V           &kp Q         &kp J         &kp U         &kp O
+// ╭─────────────┬─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────╮
+     &kp F         &kp S         &kp N         &kp T         &kp C         &kp B           &kp DOT       &kp H         &kp E         &kp A         &kp I         &kp Y
+// ╰─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╯
+                   &kp Z         &kp X         &kp K         &kp G         &kp W           &kp M         &kp L         &kp SEMICOLON &kp SQT       &kp COMMA
+//               ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
+                                                             ___           ___             ___           ___
 //                                                         ╰─────────────┴─────────────╯ ╰─────────────┴─────────────╯
 )
 
 ZMK_LAYER(nums,
 //                             ╭─────────────┬─────────────┬─────────────┬─────────────╮ ╭─────────────┬─────────────┬─────────────┬─────────────╮
-                                 &kp F7        &kp F8        &kp F9        &kp F12         &to L_RECR    &kp N7        &kp N8        &kp N9
+                                 &kp F7        &kp F8        &kp F9        &kp F12         &tog L_RECR   &kp N7        &kp N8        &kp N9
 // ╭─────────────┬─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────╮
      &mo L_SYMS    XXX           &kp F4        &kp F5        &kp F6        &kp F11         XXX           &kp N4        &kp N5        &kp N6        &kp DOT       &mo L_SYMS
 // ╰─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╯
@@ -138,20 +151,8 @@ ZMK_LAYER(syms,
 // ╭─────────────┬─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────╮
      XXX           XXX           XXX           &kp UNDER     &kp MINUS     &kp LPAR        &kp RPAR      &kp QUESTION  &kp EQUAL     &kp PLUS      XXX           XXX
 // ╰─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╯
-                   XXX           XXX           XXX           XXX           &kp LBKT        &kp RBKT      XXX           XXX           XXX           XXX
+                   XXX           XXX           XXX           &kp BACKSLASH &kp LBKT        &kp RBKT      &kp GRAVE     XXX           XXX           XXX
 //               ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
                                                              ___           &kp LSHFT       ___           ___
-//                                                         ╰─────────────┴─────────────╯ ╰─────────────┴─────────────╯
-)
-
-ZMK_LAYER(recurva,
-//                             ╭─────────────┬─────────────┬─────────────┬─────────────╮ ╭─────────────┬─────────────┬─────────────┬─────────────╮
-                                 &kp R         &kp D         &kp P         &kp V           &kp Q         &kp J         &kp U         &kp O
-// ╭─────────────┬─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────╮
-     &kp F         &kp S         &kp N         &kp T         &kp C         &kp B           &kp DOT       &kp H         &kp E         &kp A         &kp I         &kp Y
-// ╰─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╯
-                   &kp Z         &kp X         &kp K         &kp G         &kp W           &kp M         &kp L         &kp SEMICOLON &kp SQT       &kp COMMA
-//               ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                                             &to L_BASE    NUMS_SPACE      ___           &kp LGUI
 //                                                         ╰─────────────┴─────────────╯ ╰─────────────┴─────────────╯
 )
