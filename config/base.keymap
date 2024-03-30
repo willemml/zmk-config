@@ -75,7 +75,6 @@ ZMK_BEHAVIOR(hmr, hold_tap,
 //ZMK_COMBO(name, bindings, keypos, layers, timeout)
 
 ZMK_COMBO(c_terminal, &kp LC(ENTER), LM4 LM5, ALL, COMBO_JOINTLY_MS)
-ZMK_COMBO(c_launcher, &kp LG(SPACE), RM0 RM1, ALL, COMBO_JOINTLY_MS)
 
 ZMK_COMBO(c_bksp, &kp BSPC, RT2 RT3, ALL, COMBO_JOINTLY_MS)
 ZMK_COMBO(c_esc, &kp ESC, LT3 LT2, ALL, COMBO_JOINTLY_MS)
@@ -88,13 +87,19 @@ ZMK_COMBO(c_capsword, &caps_word, LM2 LM3 RM3 RM2, ALL, COMBO_JOINTLY_MS)
 
 ZMK_COMBO(c_slash, &kp SLASH, RM1 RT2 RT3, ALL, COMBO_JOINTLY_MS)
 ZMK_COMBO(c_pipe, &kp PIPE, LM1 LT2 LT3, ALL, COMBO_JOINTLY_MS)
+ZMK_COMBO(c_under, &kp UNDERSCORE, RB1 RB2 RB3, ALL, COMBO_JOINTLY_MS)
+ZMK_COMBO(c_minus, &kp MINUS, LB1 LB2 LB3, ALL, COMBO_JOINTLY_MS)
+ZMK_COMBO(c_lparen, &kp LPAR, LT0 LM0, ALL, COMBO_JOINTLY_MS)
+ZMK_COMBO(c_rparen, &kp RPAR, RT0 RM0, ALL, COMBO_JOINTLY_MS)
+ZMK_COMBO(c_lbrk, &kp LBKT, LM0 LB0, ALL, COMBO_JOINTLY_MS)
+ZMK_COMBO(c_rbrk, &kp RBKT, RM0 RB0, ALL, COMBO_JOINTLY_MS)
 
 ZMK_COMBO(c_arrup, &kp UP, LT1 LT2, ALL, COMBO_JOINTLY_MS)
 ZMK_COMBO(c_arrright, &kp RIGHT, LM1 LM2, ALL, COMBO_JOINTLY_MS)
 ZMK_COMBO(c_arrdown, &kp DOWN, LB2 LB3, ALL, COMBO_JOINTLY_MS)
 ZMK_COMBO(c_arrleft, &kp LEFT, LM4 LM3, ALL, COMBO_JOINTLY_MS)
 
-ZMK_COMBO(c_bootloader, &bootloader, 8 9 20 31 32 18 19 29, ALL, COMBO_JOINTLY_MS)
+ZMK_COMBO(c_bootloader, &bootloader, 8 9 20 31 32 18 19 29, ALL, COMBO_LAZILY_MS)
 
 // misc aliases
 #define C_S_SPACE &kp LC(LS(SPACE))
@@ -107,11 +112,11 @@ ZMK_LAYER(base,
 //                             ╭─────────────┬─────────────┬─────────────┬─────────────╮ ╭─────────────┬─────────────┬─────────────┬─────────────╮
                                  &kp W         &kp F         &kp P         &kp G           &kp J         &kp L         &kp U         &kp Y
 // ╭─────────────┬─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────╮
-     &kp Q         &kp A         &kp R         &kp S         &kp T         &kp D           &kp H         &kp N         &kp E         &kp I         &kp O         &kp SEMICOLON
+     &kp Q         &kp A         &kp R         &kp S         &hml LCTL T   &hml LGUI D     &hmr LGUI H   &hmr LCTL N   &kp E         &kp I         &kp O         &kp SEMICOLON
 // ╰─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╯
                    &kp Z         &kp X         &kp C         &kp V         &kp B           &kp K         &kp M         &kp COMMA     &kp DOT       &kp SQT
 //               ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                                             &kp LCTL      NUMS_SPACE      &kp E         &kp LGUI
+                                                             &kp LCTL      NUMS_SPACE      &key_repeat   &mo L_SYMS 
 //                                                         ╰─────────────┴─────────────╯ ╰─────────────┴─────────────╯
 )
 
@@ -119,11 +124,11 @@ ZMK_LAYER(nums,
 //                             ╭─────────────┬─────────────┬─────────────┬─────────────╮ ╭─────────────┬─────────────┬─────────────┬─────────────╮
                                  &kp F7        &kp F8        &kp F9        &kp F12         &to L_RECR    &kp N7        &kp N8        &kp N9
 // ╭─────────────┬─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────╮
-     XXX           XXX           &kp F4        &kp F5        &kp F6        &kp F11         XXX           &kp N4        &kp N5        &kp N6        &kp DOT       &kp PLUS
+     &mo L_SYMS    XXX           &kp F4        &kp F5        &kp F6        &kp F11         XXX           &kp N4        &kp N5        &kp N6        &kp DOT       &mo L_SYMS
 // ╰─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╯
                    XXX           &kp F1        &kp F2        &kp F3        &kp F10         XXX           &kp N1        &kp N2        &kp N3        &kp N0
 //               ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                                             ___           &kp LGUI        &kp SPACE     ___
+                                                             ___           ___             &kp LGUI      &kp LCTL
 //                                                         ╰─────────────┴─────────────╯ ╰─────────────┴─────────────╯
 )
 
@@ -131,11 +136,11 @@ ZMK_LAYER(syms,
 //                             ╭─────────────┬─────────────┬─────────────┬─────────────╮ ╭─────────────┬─────────────┬─────────────┬─────────────╮
                                  &kp EXCL      &kp AT        &kp POUND     &kp DLLR        &kp PRCNT     &kp CARET     &kp AMPS      &kp STAR
 // ╭─────────────┬─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────╮
-     &kp K_PP      XXX           XXX           XXX           XXX           XXX             XXX           XXX           XXX           XXX           XXX           &kp K_NEXT
+     XXX           XXX           XXX           &kp UNDER     &kp MINUS     &kp LPAR        &kp RPAR      &kp QUESTION  &kp EQUAL     &kp PLUS      XXX           XXX
 // ╰─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╯
-                   XXX           XXX           XXX           XXX           XXX             XXX           XXX           XXX           XXX           XXX
+                   XXX           XXX           XXX           XXX           &kp LBKT        &kp RBKT      XXX           XXX           XXX           XXX
 //               ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                                             C_S_SPACE     &kp LSHFT       &kp SPACE     A_S_SPACE
+                                                             ___           &kp LSHFT       ___           ___
 //                                                         ╰─────────────┴─────────────╯ ╰─────────────┴─────────────╯
 )
 
@@ -143,10 +148,10 @@ ZMK_LAYER(recurva,
 //                             ╭─────────────┬─────────────┬─────────────┬─────────────╮ ╭─────────────┬─────────────┬─────────────┬─────────────╮
                                  &kp R         &kp D         &kp P         &kp V           &kp Q         &kp J         &kp U         &kp O
 // ╭─────────────┬─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────╮
-     &kp F         &kp S         &kp N         &kp T         &kp C         &kp B           &kp DOT       &kp H         &kp XXX       &kp A         &kp I         &kp Y
+     &kp F         &kp S         &kp N         &kp T         &kp C         &kp B           &kp DOT       &kp H         &kp E         &kp A         &kp I         &kp Y
 // ╰─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╯
                    &kp Z         &kp X         &kp K         &kp G         &kp W           &kp M         &kp L         &kp SEMICOLON &kp SQT       &kp COMMA
 //               ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                                             &to L_BASE    NUMS_SPACE      &kp E         &kp LGUI
+                                                             &to L_BASE    NUMS_SPACE      ___           &kp LGUI
 //                                                         ╰─────────────┴─────────────╯ ╰─────────────┴─────────────╯
 )
