@@ -1,6 +1,12 @@
 #include <behaviors.dtsi>
 #include <behaviors/num_word.dtsi> // requires auto-layer module
 #include <dt-bindings/zmk/keys.h>
+#if CONFIG_WIRELESS
+    #include <dt-bindings/zmk/bt.h>
+    #define _BT_SEL_KEYS_ &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR
+#else
+    #define _BT_SEL_KEYS_ &trans &trans &trans &trans &trans
+#endif
 
 #include "zmk-helpers/helper.h"
 
@@ -30,10 +36,6 @@
 &sk {  // sticky-key config
     release-after-ms = <900>;  // release after 0.6s
     quick-release;             // no double capitalization when rolling keys
-};
-
-&sl {  // sticky-layer config
-    ignore-modifiers;          // allow chording sticky mods & layers
 };
 
 &lt {  // layer-tap config
@@ -182,7 +184,7 @@ ZMK_MACRO(win_sleep,
     bindings = <&kp LG(X) &kp U &kp S>;
 )
 
-// misc aliases
+// misc aliases   
 
 #define CANCEL      &kp K_CANCEL             // cancel caps-word, num-word and smart-mouse
 #define DSK_PREV    &hmr LCTRL LG(LC(LEFT))   // previous desktop
@@ -208,7 +210,7 @@ ZMK_LAYER(base,
 // ╰─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╯
                    &kp Z         &kp X         &kp C         &kp V         &kp B           &kp K         &kp M         &kp COMMA     &kp DOT       &kp SLASH
 //               ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                                             SYMS_WDEL     NUMS_SPACE      &key_repeat   &mo NAV
+                                                             ___           ___             ___           ___
 //                                                         ╰─────────────┴─────────────╯ ╰─────────────┴─────────────╯
 )
 

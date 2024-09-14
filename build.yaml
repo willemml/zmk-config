@@ -12,6 +12,8 @@
 #     shield: reviung41
 #
 ---
+board: ["nice_nano_v2"]
+shield: ["osprette"]
 include:
   - board: nice_nano_v2
     shield: osprette
