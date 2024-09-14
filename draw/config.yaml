@@ -6,3 +6,11 @@ parse_config:
 draw_config:
   footer_text: "willemml/zmk-config"
   dark_mode: auto
+  separate_combo_diagrams: false
+  key_w: 100
+  key_h: 100
+  combo_w: 35
+  combo_h: 35
+  inner_pad_w: 18
+  inner_pad_h: 18
+  combo_diagrams_scale: 4
