@@ -114,13 +114,13 @@ ZMK_COMBO(c_bootloader, &bootloader, 8 9 20 31 32 18 19 29, ALL, COMBO_LAZILY_MS
 /* Keymap */
 
 
-ZMK_LAYER(recr,
+ZMK_LAYER(colm,
 //                             ╭─────────────┬─────────────┬─────────────┬─────────────╮ ╭─────────────┬─────────────┬─────────────┬─────────────╮
-                                 &kp R         &kp D         &kp P         &kp V           &kp Q         &kp J         &kp U         &kp O
+                                 &kp W         &kp F         &kp P         &kp G           &kp J         &kp L         &kp U         &kp Y
 // ╭─────────────┬─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────╮
-     &kp F         &kp S         &kp N         &hml LALT T   &hml LCTL C   &hml LGUI B     &hmr LGUI DOT &hmr LCTL H   &hmr LALT E   &kp A         &kp I         &kp Y
+     &kp Q         &kp A         &kp R         &hml LALT S   &hml LCTL T   &hml LGUI D     &hmr LGUI H   &hmr LCTL N   &hmr LALT E   &kp I         &kp O         &kp SEMICOLON
 // ╰─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╯
-                   &kp Z         &kp X         &kp K         &kp G         &kp W           &kp M         &kp L         &kp SEMICOLON &kp SQT       &kp COMMA
+                   &kp Z         &kp X         &kp C         &kp V         &kp B           &kp K         &kp M         &kp COMMA     &kp DOT       &kp SLASH
 //               ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
                                                              SYMS_WDEL     NUMS_SPACE      &key_repeat   &mo L_NAVS 
 //                                                         ╰─────────────┴─────────────╯ ╰─────────────┴─────────────╯
