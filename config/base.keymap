@@ -104,14 +104,12 @@ ZMK_COMBO(c_arrleft, &kp LEFT, LM4 LM3, ALL, COMBO_JOINTLY_MS)
 ZMK_COMBO(c_bootloader, &bootloader, 8 9 20 31 32 18 19 29, ALL, COMBO_LAZILY_MS)
 
 // misc aliases
-#define C_S_SPACE &kp LC(LS(SPACE))
-#define A_S_SPACE &kp LA(LS(SPACE))
 #define NUMS_SPACE &lt L_NUMS SPACE
 #define SYMS_WDEL &lt L_SYMS LA(BSPC)
 #define LOCK &kp LG(LC(Q))
 
-#define BROW_TL &kp LG(LC(LEFT))
-#define BROW_TR &kp LG(LC(RIGHT))
+#define BROW_TL &kp LG(LA(LEFT))
+#define BROW_TR &kp LG(LA(RIGHT))
 
 /* Keymap */
 
