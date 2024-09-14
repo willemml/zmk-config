@@ -1,5 +1,8 @@
 /* source keypos definitions */
-#include "../zmk-nodefree-config/keypos_def/keypos_34keys_osprette.h"
+#include "zmk-helpers/key-labels/osprette.h"
+
+/* activate bluetooth */
+#define CONFIG_WIRELESS 1
 
 /* source the main keymap */
 #include "base.keymap"
