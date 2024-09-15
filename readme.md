@@ -8,6 +8,12 @@ configuration, based in decent amounts on the works of
 It powers my "smol boards" like
 [Sam Mohr's Osprette](https://sammohr.dev/keyboards).
 
+### Layout Image
+
+Created with [keyboard-layout-editor.com](keyboard-layout-editor.com), see my layout [here](http://www.keyboard-layout-editor.com/#/gists/5ce5abe75a9b99c9d191a80f0adc5aca). Slightly modified copy of [urob's](http://www.keyboard-layout-editor.com/#/gists/06469e3337fa76f1c6e95229f5c58522).
+
+![](./layout.png)
+
 ### Setup
 
 #### Pre-requisites
