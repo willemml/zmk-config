@@ -1,8 +1,11 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
-  "features": {
-    "ghcr.io/devcontainers/features/nix:1": {
-      "packages": ["direnv","nix-direnv"]
-    }
-  }
+	"name": "Ubuntu",
+	"image": "mcr.microsoft.com/devcontainers/base:jammy",
+	"features": {
+		"ghcr.io/devcontainers/features/nix:1": {
+			"version": "latest",
+			"packages": ["direnv", "nix-direnv"],
+			"useAttributePath": true
+		}
+	}
 }
